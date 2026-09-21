@@ -2,84 +2,216 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Personal Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The personal website of Zhenyu Xu, a student interested in science, technology, and programming.">
+  <title>Zhenyu Xu | Personal Homepage</title>
   <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: rgba(255, 255, 255, 0.86);
+      --text: #172033;
+      --muted: #667085;
+      --primary: #6257e8;
+      --primary-dark: #463bc6;
+      --line: #e7eaf2;
+      --shadow: 0 18px 55px rgba(31, 41, 70, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
       margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      padding: 40px;
-      margin-top: 40px;
-      border-radius: 10px;
-    }
-    h1 {
-      font-size: 32px;
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-      margin-top: 40px;
-    }
-    p {
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(98, 87, 232, 0.13), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(72, 190, 206, 0.12), transparent 28%),
+        var(--bg);
     }
-    a {
-      color: #007acc;
-      text-decoration: none;
+    a { color: inherit; text-decoration: none; }
+    .nav, .container { width: min(1080px, calc(100% - 40px)); margin: auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
     }
-    .footer {
-      margin-top: 50px;
-      color: gray;
-      font-size: 14px;
-      text-align: center;
+    .brand { font-weight: 800; letter-spacing: .02em; }
+    .brand span { color: var(--primary); }
+    .nav-links { display: flex; gap: 26px; color: var(--muted); font-size: .95rem; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: center;
+      gap: 60px;
+      min-height: 580px;
+      padding: 70px 0 95px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--primary); }
+    h1 {
+      max-width: 700px;
+      margin: 18px 0;
+      font-size: clamp(3rem, 7vw, 5.7rem);
+      line-height: 1.02;
+      letter-spacing: -.065em;
+    }
+    h1 .accent { color: var(--primary); }
+    .hero-copy { max-width: 610px; color: var(--muted); font-size: 1.12rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .button {
+      display: inline-block;
+      padding: 12px 21px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { color: white; background: var(--primary); box-shadow: 0 9px 20px rgba(98, 87, 232, .25); }
+    .button.primary:hover { background: var(--primary-dark); }
+    .button.secondary { border: 1px solid var(--line); background: white; }
+
+    .portrait-card {
+      position: relative;
+      width: min(330px, 100%);
+      aspect-ratio: 1;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 36px;
+      background: linear-gradient(145deg, #dcd9ff, #d5f5f5);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .portrait-card::after { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(255,255,255,.8); border-radius: 28px; }
+    .initials { position: relative; z-index: 1; color: white; font-size: 6rem; font-weight: 900; letter-spacing: -.08em; text-shadow: 0 10px 25px rgba(70,59,198,.25); }
+    .portrait-note { position: absolute; bottom: 25px; z-index: 2; padding: 7px 13px; border-radius: 20px; color: var(--primary-dark); background: rgba(255,255,255,.75); font-size: .75rem; }
+
+    section { padding: 88px 0; }
+    .section-heading { margin-bottom: 35px; }
+    .section-heading h2 { margin: 8px 0; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+    .section-heading p { max-width: 600px; margin: 0; color: var(--muted); }
+    .about-grid, .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .about-text { grid-column: span 2; padding: 30px; border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); }
+    .about-text p { margin-top: 0; color: var(--muted); }
+    .fact { padding: 25px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.55); }
+    .fact strong { display: block; margin-bottom: 5px; font-size: 1.8rem; color: var(--primary); }
+    .fact span { color: var(--muted); font-size: .92rem; }
+    .card { padding: 27px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .card-icon { font-size: 1.7rem; }
+    .card h3 { margin: 15px 0 8px; }
+    .card p { margin: 0; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .tag { padding: 5px 11px; border-radius: 999px; color: var(--primary-dark); background: #eeedff; font-size: .8rem; font-weight: 700; }
+    .contact { padding: 48px; border-radius: 28px; color: white; background: linear-gradient(120deg, #4e45cf, #7168ef); box-shadow: var(--shadow); }
+    .contact h2 { margin-top: 0; font-size: 2.2rem; }
+    .contact p { max-width: 600px; color: rgba(255,255,255,.8); }
+    .contact .button { color: var(--primary-dark); background: white; }
+    footer { padding: 30px 0 45px; color: var(--muted); text-align: center; font-size: .9rem; }
+
+    @media (max-width: 760px) {
+      .nav, .container { width: min(100% - 30px, 620px); }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 35px; padding: 55px 0 65px; }
+      .hero-copy { font-size: 1rem; }
+      .portrait-card { width: 240px; }
+      .initials { font-size: 4.5rem; }
+      section { padding: 60px 0; }
+      .about-grid, .card-grid { grid-template-columns: 1fr; }
+      .about-text { grid-column: auto; }
+      .contact { padding: 30px; }
     }
   </style>
 </head>
 <body>
+  <header class="nav">
+    <a class="brand" href="#top">Zhenyu<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-  <div class="container">
-    <h1>Hello, I'm Zhenyu Xu(许震宇)</h1>
-    <p>
-      Welcome to my personal website. This site is used for personal presentation and profile showcase.
-    </p>
+  <main id="top" class="container">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Welcome to my space</div>
+        <h1>Hello, I'm <span class="accent">Zhenyu Xu</span>.</h1>
+        <p class="hero-copy">A student at Westlake University exploring science, technology, and programming. I enjoy turning curiosity into things that work.</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">View my work ↓</a>
+          <a class="button secondary" href="mailto:xzy8806@gmail.com">Say hello</a>
+        </div>
+      </div>
+      <div class="portrait-card" aria-label="Profile placeholder">
+        <div class="initials">ZX</div>
+        <div class="portrait-note">Your photo can go here</div>
+      </div>
+    </section>
 
-    <h2>About Me</h2>
-    <p>
-      I am currently a student in westlake university with strong interest in science, technology, and programming.
-      I enjoy learning new skills and exploring interdisciplinary fields.
-    </p>
+    <section id="about">
+      <div class="section-heading">
+        <div class="eyebrow">A little about me</div>
+        <h2>Curious by nature, always learning.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am currently a student at Westlake University with a strong interest in science, technology, and programming. I enjoy learning new skills, exploring interdisciplinary fields, and building a solid foundation for future projects.</p>
+          <p>When I am not studying, I like experimenting with Linux, improving my coding workflow, and documenting what I learn.</p>
+        </div>
+        <div class="fact"><strong>01</strong><span>Student at Westlake University</span></div>
+        <div class="fact"><strong>∞</strong><span>Curiosity and things to learn</span></div>
+      </div>
+    </section>
 
-    <h2>Skills</h2>
-    <p>
-      • Programming: Python, Linux<br>
-      • Tools: Git, GitHub<br>
-      • Languages: English, Chinese
-    </p>
+    <section id="skills">
+      <div class="section-heading">
+        <div class="eyebrow">What I use</div>
+        <h2>Skills & interests</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card"><div class="card-icon">⌘</div><h3>Programming</h3><p>Building a practical foundation through hands-on coding and problem solving.</p><div class="tags"><span class="tag">Python</span><span class="tag">Linux</span></div></article>
+        <article class="card"><div class="card-icon">✦</div><h3>Tools</h3><p>Comfortable learning and working with modern tools for projects and collaboration.</p><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span></div></article>
+        <article class="card"><div class="card-icon">文</div><h3>Languages</h3><p>Communicating and learning across different languages and perspectives.</p><div class="tags"><span class="tag">English</span><span class="tag">中文</span></div></article>
+      </div>
+    </section>
 
-    <h2>Projects</h2>
-    <p>
-      • Personal Website based on GitHub Pages<br>
-      • Linux & Git learning projects<br>
-      • Physics & academic-related projects
-    </p>
+    <section id="projects">
+      <div class="section-heading">
+        <div class="eyebrow">Things I am building</div>
+        <h2>Selected projects</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card"><div class="card-icon">◈</div><h3>Personal Website</h3><p>A simple, evolving home on the web built with HTML and hosted on GitHub Pages.</p><div class="tags"><span class="tag">HTML</span><span class="tag">GitHub Pages</span></div></article>
+        <article class="card"><div class="card-icon">⌁</div><h3>Linux & Git Learning</h3><p>Small experiments and notes as I develop a more efficient technical workflow.</p><div class="tags"><span class="tag">Open source</span><span class="tag">Learning</span></div></article>
+        <article class="card"><div class="card-icon">◌</div><h3>Physics & Academia</h3><p>Exploring academic questions and interdisciplinary ideas through projects and study.</p><div class="tags"><span class="tag">Science</span><span class="tag">Research</span></div></article>
+      </div>
+    </section>
 
-    <h2>Contact</h2>
-    <p>
-      Email: xzy8806@gmail.com<br>
-      GitHub: <a href="https://github.com/xzy8806-beep">https://github.com/xzy8806-beep</a>
+    <section id="contact">
+      <div class="contact">
+        <h2>Let's connect.</h2>
+        <p>If you would like to talk about technology, science, learning, or a potential project, feel free to reach out.</p>
+        <a class="button" href="mailto:xzy8806@gmail.com">xzy8806@gmail.com ↗</a>
+      </div>
+    </section>
+  </main>
 
-    </p>
-
-    <div class="footer">
-      © 2025 Zhenyu Xu | Powered by GitHub Pages
-    </div>
-  </div>
-
+  <footer>© 2026 Zhenyu Xu · Built with HTML & hosted on GitHub Pages</footer>
 </body>
 </html>
